@@ -1,4 +1,4 @@
-package edu.nd.se2018.homework.hwk2;
+package edu.nd.se2018.homework.homework3;
 
 public class Steady implements Strategy {
 	double position = 0; // position in miles

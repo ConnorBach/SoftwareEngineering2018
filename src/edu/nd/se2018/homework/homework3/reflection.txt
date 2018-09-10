@@ -1,0 +1,22 @@
+1.   In which class and method is the strategy going to be set?
+2.   What will your strategy hierarchy look like?  Will you use an abstract base class or an interface?
+     What methods will strategy classes include?
+3.   What other classes will you need?
+4.   Where will you put the control loop for the race?
+5.    What data structure will you use to manage horses in the race?
+
+1. Each horse instance contains a strategy instance where the strategy is set. This allows each horse to change strategies if needed.
+
+2. I used an interface to setup the strategy hierarchy. Each strategy class
+    implements the strategy interface. Each strategy needs to implement the run
+    and changeSpeed methods but each one has a different implementation.
+
+3. I also created a Main class, a Horse class, a RunRace class, and classes
+    for each strategy (Early, Slow, Steady).
+
+4. The control loop for the race resides in the RunRace class. This class
+    handles all things related to running the race such as keeping track of horses and announcing winners.
+
+5. I used an ArrayList to manage the horses because I do not need to delete
+horses from the race, only add them, and ArrayLists have efficent insertion
+operations.
