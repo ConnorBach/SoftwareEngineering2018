@@ -1,14 +1,17 @@
 package edu.nd.se2018.homework.homework4;
 
 import java.awt.Point;
+import java.util.Observable;
 
-public class Ship {
+public class Ship extends Observable {
 	private Point pos;
+	private Integer[][] map;
 	
-	public Ship() {
+	public Ship(OceanMap map) {
 		pos = new Point();
-		pos.x = 10;
-		pos.y = 10;
+		this.map = map.map;
+		pos.x = 5;
+		pos.y = 5;
 	}
 	
 	public Point getPos() {
@@ -17,20 +20,28 @@ public class Ship {
 
 	public void goEast() {
 		// TODO Auto-generated method stub
-		pos.x += 1;
+		if(pos.x < 24 && map[pos.x+1][pos.y] == 0) pos.x += 1;
+		update();
 	}
 	
 	public void goWest() {
 		// TODO Auto-generated method stub
-		pos.x -= 1;
-		
+		if(pos.x > 0 && map[pos.x-1][pos.y] == 0) pos.x -= 1;
+		update();
 	}
 	public void goNorth() {
 		// TODO Auto-generated method stub
-		pos.y -= 1;
+		if(pos.y > 0 && map[pos.x][pos.y-1] == 0) pos.y -= 1;
+		update();
 	}
 	public void goSouth() {
 		// TODO Auto-generated method stub
-		pos.y += 1;
+		if(pos.y < 24 && map[pos.x][pos.y+1] == 0) pos.y += 1;
+		update();
+	}
+	
+	public void update() {
+		setChanged();
+		notifyObservers();
 	}
 }

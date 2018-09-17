@@ -1,0 +1,18 @@
+The OceanExplorer class does most of the heavy lifting, holding instances 
+of the ships, pirate ships, and ocean map. It handles all the animation by
+checking the key press event and updating the location of the images.
+
+Each ship and pirate ship has a position and the ability to move. The ship
+moves based on key presses and the pirate ships "chase" the ship. Each
+pirate ship is registered as an observer of the actual ship so they have
+a constantly updated location for the ship.
+
+Every object has an instance of the ocean map, so they can check for
+collisions with islands and avoid them.
+
+To implement the stretch part of the assignment I would keep the islands
+in the same place. Then I would reset the positions of the ship and pirate
+ships by calling set position methods for each and passing random numbers
+until they find an empty square to occupy. Since the OceanExplorer class
+gets all of its position information from the ship classes, you only need
+to update the positions in those classes.
