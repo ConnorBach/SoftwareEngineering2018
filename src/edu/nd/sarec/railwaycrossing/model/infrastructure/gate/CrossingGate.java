@@ -1,5 +1,6 @@
 package edu.nd.sarec.railwaycrossing.model.infrastructure.gate;
 
+import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -31,6 +32,8 @@ public class CrossingGate extends Observable implements Observer{
 	private Line line; 
 	private Pane root;
 	
+	private HashSet<Train> trains;
+	
 	String gateName;
 	
 	public CrossingGate(){}
@@ -40,8 +43,10 @@ public class CrossingGate extends Observable implements Observer{
 		anchorY = yPosition;
 		movingX = anchorX;
 		movingY = anchorY-60;
-		triggerPoint = anchorX+250;
-		exitPoint = anchorX-250;
+		triggerPoint = anchorX+320;
+		exitPoint = anchorX-320;
+		
+		trains = new HashSet<>();
 		
 		// Gate elements
 		line = new Line(anchorX, anchorY,movingX,movingY);
@@ -74,7 +79,7 @@ public class CrossingGate extends Observable implements Observer{
 			line.setEndX(movingX);
 			line.setEndY(movingY);
 		} else {
-			currentGateState.gateFinishedOpening();
+			currentGateState.gateFinishedClosing();
 		}
 	}
 	
@@ -119,11 +124,25 @@ public class CrossingGate extends Observable implements Observer{
 	public void update(Observable o, Object arg) {
 		if (o instanceof Train){
 			Train train = (Train)o;
-			if (train.getVehicleX() < exitPoint)
+			
+			if(!trains.contains(train)) {
+				trains.add(train);
+				System.out.println("added train");
+			}
+			
+			int cnt = 0;
+			for(Train t : trains) {
+				double pos = t.getVehicleX();
+				if(pos >= exitPoint && pos <= triggerPoint) {
+					cnt++;
+				}
+			}
+			
+			if(cnt == 0) {
 				currentGateState.leaveStation();
-			else if(train.getVehicleX() < triggerPoint){
+			} else {
 				currentGateState.approachStation();
-			} 
+			}
 		}	
 	}
 }

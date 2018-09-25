@@ -15,6 +15,7 @@ public class Train extends Observable implements IVehicle{
 	private double currentX = 0;
 	private double currentY = 0;
 	private double originalX = 0;
+	private double speed = 0;
 	private Image img;
 	private ImageView imgView;
 	private int trainLength = 35;
@@ -23,7 +24,8 @@ public class Train extends Observable implements IVehicle{
 		this.currentX = x;
 		this.currentY = y;
 		originalX = x;
-		img = new Image("images\\Train.PNG",120,trainLength,false,false);
+		speed = 2;
+		img = new Image("images/Train.PNG",120,trainLength,false,false);
 		imgView = new ImageView(img);
 		imgView.setX(currentX);
 		imgView.setY(currentY);
@@ -37,15 +39,23 @@ public class Train extends Observable implements IVehicle{
 		return currentY;
 	}
 	
+	public double getSpeed() {
+		return speed;
+	}
+	
 	public void move(){
-		currentX-=2;
+		currentX-=speed;
 		imgView.setX(currentX);
 		setChanged();
 		notifyObservers();
 	}
 	
+	public void setSpeed(double s) {
+		speed = s;
+	}
+	
 	public boolean offScreen(){
-		if (currentX < -200)
+		if (currentX < -200 || currentX > 1400)
 			return true;
 		else
 			return false;				
