@@ -1,0 +1,17 @@
+Features
+========
+
+## Completed
+
+25 x 25 Grid is displayed
+Chip is placed on the grid
+Chip can be moved with arrow keys
+Chip's image changes based on direction
+
+
+## In Progress
+
+Add obstacles to the map
+Add animated monsters
+Add special items (speed boost)
+Add text and UI
