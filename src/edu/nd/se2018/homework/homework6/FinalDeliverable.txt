@@ -12,4 +12,31 @@ item is picked up.
 
 Overall I like how my design came together. It was fairly easy to manage interactions between Chip, the map, and the game loop.
 I had considered making another class for the lava but managing it in the map turned out to be simpler. Similarly, the item
-did not have enough complexity to warrant it's own class, making it easier to integrate it into the Chip class. 
+did not have enough complexity to warrant it's own class, making it easier to integrate it into the Chip class. If I were to
+make any changes to the design I would probably try to design a more modular level system. Maybe implementing a level class
+that can hold instances of the map and chip and create a new level each time would be a better design. Currently each level
+lives in the ChipsChallenge class which would get very large if more complex levels were added.
+
+
+Design Patterns Used
+====================
+
+1.
+Pattern Name: Observer
+Class Name: Chip
+Role in Pattern: Sends location to the game loop
+Class: ChipsChallenge
+Role in Pattern: Checks location of Chip
+Purpose: In order to update the position of Chip on the map, the game loop observes the character.
+
+2.
+Pattern: Singleton
+Class: ChipMap
+Role: Since there is only one map in the game, I made this class singleton to prevent multiple maps.
+Each time the game changes the map, the same reference should be used.
+
+3.
+Pattern: State
+Class: Chip
+Role: Every time the item is picked up, the state of the Chip class changes, modifying it's behaviour.
+The movement of the Chip class changes when the item has been picked up.

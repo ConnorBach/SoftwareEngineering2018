@@ -49,7 +49,7 @@ public class ChipsChallenge extends Application {
 		startGame();
 		
 		// setup map
-		chipMap = new ChipMap();
+		chipMap = ChipMap.getInstance();
 		chipMap.drawMap(p.getChildren(), scalingFactor);
 		chipMap.placeWalls(p.getChildren(), scalingFactor, 10);
 		itemImg = chipMap.placeItem(p.getChildren(), scalingFactor);

@@ -14,6 +14,14 @@ public class ChipMap {
 	final int dimensions = 25;
 	Point end;
 	
+	private static ChipMap chipMap = new ChipMap();
+	
+	private ChipMap() {};
+	
+	public static ChipMap getInstance() {
+		return chipMap;
+	}
+	
 	public void drawMap(ObservableList<javafx.scene.Node> observableList, int scale) {
 		for(int i = 0; i < dimensions; i++) {
 			for(int j = 0; j < dimensions; j++) {
